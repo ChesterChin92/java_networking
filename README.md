@@ -3,9 +3,11 @@
 Supported commands
 
 1.showrec 
+  
   Display all record from the server
 
 2.finduser
+  
   Display a specific user's details
   
   
