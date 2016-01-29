@@ -62,5 +62,39 @@ Supported commands
   Sign out from server.
        4.1 Server Side - Save User and Books into text file
 	   4.2 Terminate connection
+
   
+  
+
+  
+                                   -------------------Screenshots------------------
+  
+Server Side Initiation
+
+![Alt text](https://cloud.githubusercontent.com/assets/11572463/12675892/9304bb9a-c6c8-11e5-9dd0-65896c474ab7.png)
+
+
+Client Side Initiation
+
+![Alt text](https://cloud.githubusercontent.com/assets/11572463/12675890/92b58d04-c6c8-11e5-8156-4f89bf26b987.png)
+
+
+Client Side Usage
+
+![Alt text](https://cloud.githubusercontent.com/assets/11572463/12675889/92905016-c6c8-11e5-8ec6-3bc06362bef9.png)
+ 
+ 
+Server Side Terminate
+
+![Alt text](https://cloud.githubusercontent.com/assets/11572463/12675893/93303ee6-c6c8-11e5-8527-02a401a86545.png)
+
+ 
+Saved Records 
+
+![Alt text](https://cloud.githubusercontent.com/assets/11572463/12675891/92e17996-c6c8-11e5-87b0-29388c3e0ac2.png)
+ 
+ 
+Saved Users 
+
+![Alt text](https://cloud.githubusercontent.com/assets/11572463/12675894/9355af3c-c6c8-11e5-849c-dee2fd48c00c.png)
   
