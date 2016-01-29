@@ -1,7 +1,9 @@
 # java_networking
 
-Table of content 
+Table of content
+ 
 1. Lab 2 - Client and Server with commands
+
 2. Lab 3 - Server side with file saving 
 
 
