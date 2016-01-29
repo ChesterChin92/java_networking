@@ -1,0 +1,3 @@
+0999	Fred A. Nurg A	23 The Shacks, Junktown, JJ99 9JJ
+0555	John Polan, B	56 KDU Kolej, Georgetown, KK55 5KK
+0505	Ron Mulan C	40 KDUPG, Newtown, PP44 4PP
