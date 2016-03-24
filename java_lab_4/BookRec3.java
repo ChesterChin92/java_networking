@@ -1,4 +1,4 @@
-package java_lab_3;
+package java_lab_4;
 import java.util.*;
 import java.io.*;
 
@@ -11,6 +11,9 @@ public class BookRec3 {
   
   
   //Constructor creates the ArrayList of existing books loaded from file.
+/**
+ * Book class to keep details about books.
+ */
   public BookRec3() {  
     books = new ArrayList<BookRec3>();
     try { 
@@ -28,17 +31,20 @@ public class BookRec3 {
   }
 
 /**
- * Create book entry
- * @param nID ID of the book
- * @param nAuthor Name of the Author
- * @param nTitle Title of the book
+ * Method to create a new book entry
+ * @param nID ID number for books
+ * @param nAuthor Name of author
+ * @param nTitle Name of the book
  * @param nCategory Category of the book
  */
   public BookRec3(int nID, String nAuthor, String nTitle, String nCategory) {
 		bookID = nID;      author = nAuthor;    title = nTitle;		category = nCategory;
   }
 
-  
+  /**
+   * used with book object
+   * returns bookID, Author, Title, Category in a specific format
+   */
   public String toString() {
     return String.format("%04d\t%s\t%s\t%s\r\n", bookID, author, title, category);
   }

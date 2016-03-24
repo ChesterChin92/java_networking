@@ -62,12 +62,24 @@ public class dserver0 {
 		}
 
 	}
-
+	
+	public static class something{
+		public static void something_eh_method(){
+			 System.out.println("Hello!");
+		}
+	}
+	/**
+	 * Description
+	 * @param args
+	 */
 	public static void main( String[] args ) 
 	{
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		UserRec userdb = new UserRec();
-
+		something a = new something();
+		a.something_eh_method();
+		something.something_eh_method();
+		
 		userdb.showRecs();
 
 		userdb.addRec(888, "FredNurg", "fnurg4");
