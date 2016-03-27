@@ -4,7 +4,8 @@
  *
  */ 
 // Type wrong soli. lazy modify liao
-package netwokingProtocolDesign;
+//package NetworkFinal;
+package YH;
 
 import java.net.*;
 import java.io.*; 
@@ -32,23 +33,14 @@ public class dclient2a
           OutputStream sout = socket.getOutputStream();
           DataInputStream din = new DataInputStream(sin);
 	      PrintStream pout = new PrintStream(sout);
-	      pout.println("Hello Server, Msg from client!");
-	      
-	      len = sin.read(buff);
-	      String msg = new String(buff, 0, len);
-
-//		  Old method	      
-//    	  String msg = din.readLine();
+	      pout.println("hello, Good afternoon");
+    	  String msg = din.readLine();
 	      System.out.println("Info ::" + msg);
-			 		
-	    
+			 			 					
 		  while (true)	
 		  {
-			  
-			  len = sin.read(buff);
-			  msg = new String(buff, 0, len);
-//			  msg = din.readLine();	// from srv: "Please enter your request"
-			  System.out.print("\nInfo ::" + msg+'\n');
+			  msg = din.readLine();	// from srv: "Please enter your request"
+			  System.out.print("Info ::" + msg+'\n');
 			  System.out.print("Command ~");
 			  
 			  msg = in.readLine();	// input from keyboard
@@ -65,8 +57,7 @@ public class dclient2a
 				  
 				  len = sin.read(buff);
 				  msg = new String(buff, 0, len);
-				  System.out.print("---Search Price LIST---"+ '\n' + msg);		
-				  
+				  System.out.print("---Search Price LIST---"+ '\n' + msg);				  
 			  }
 			  else if (msg.equals("searchDate")) 
 			  {
@@ -96,8 +87,12 @@ public class dclient2a
 			  }
 			  else if (msg.equals("viewAllTicket")) 
 			  {
-				  msg = din.readLine();	// from srv" all users info
-				  System.out.println("Data ::" + msg);
+				  //msg = din.readLine();	// from srv" all users info
+				  //System.out.println("Data ::" + msg);
+				  
+				  len = sin.read(buff);
+				  msg = new String(buff, 0, len);
+				  System.out.print("---Ticket LIST---"+ '\n' + msg);
 			  }
 			  else if (msg.equals("newTicket")) 
 			  {
@@ -142,53 +137,53 @@ public class dclient2a
 				  msg = in.readLine();	// input from keyboard date
 				  pout.println(msg);
 			  }
-				else if(msg.equals("login"))
-				{
-					msg = din.readLine();	// from srv" "Enter user id: "
-					System.out.print('\n'+"Info ::" + msg);
-					msg = in.readLine();	// input from keyboard user id
-					pout.println(msg);
-					msg = din.readLine();	// from srv" "Enter password: "
-					System.out.print("Info ::" + msg);
-					msg = in.readLine();	// input from keyboard password
-					pout.println(msg);
-					
-					msg = din.readLine();	// from srv" user found info or Error Msg
-					System.out.println("Data ::" + msg);
-					//break;
-				}
-				else if (msg.equals("viewAllUser")) 
-				{
+			  else if(msg.equals("login"))
+			  {
+				  msg = din.readLine();	// from srv" "Enter user id: "
+				  System.out.print('\n'+"Info ::" + msg);
+				  msg = in.readLine();	// input from keyboard user id
+				  pout.println(msg);
+				  msg = din.readLine();	// from srv" "Enter password: "
+				  System.out.print("Info ::" + msg);
+				  msg = in.readLine();	// input from keyboard password
+				  pout.println(msg);
+				  
+				  msg = din.readLine();	// from srv" user found info or Error Msg
+				  System.out.println("Data ::" + msg);
+				  //break;
+			  }
+			  else if (msg.equals("viewAllUser")) 
+			  {
 //					Standard method
 //					msg = din.readLine();	// from srv" all users info
 //					System.out.print("Data ::" + msg);
 					
 //				Multi line Method
-					len = sin.read(buff);
-					msg = new String(buff, 0, len);
-					System.out.print("---USER LIST---"+ '\n' + msg);
+				  len = sin.read(buff);
+				  msg = new String(buff, 0, len);
+				  System.out.print("---USER LIST---"+ '\n' + msg);
 				
-				}
-				else if (msg.equals("logout")) 
-				{
-					msg = din.readLine();	// from srv" "Please come back again soon: "
-					System.out.println("Info ::" + msg);
-					break;
-				}
-				else if (msg.equals("")){
-					//Do something here
-//					 System.out.println("Empty Entry!" + msg);
-					  msg = din.readLine();
-					  System.out.println("Error ::" + msg+'\n');
-					  String empty_entry = din.readLine();
-				}
-			}                    
-		}
-		catch (IOException x ) 
-        {
-        	System.out.println("Problem encountered -> " + x );
-		}
-   	}	
+			  }
+			  else if (msg.equals("logout")) 
+			  {
+				  msg = din.readLine();	// from srv" "Please come back again soon: "
+				  System.out.println("Info ::" + msg);
+				  break;
+			  }
+			  else if (msg.equals("")){
+				  //Do something here
+				  System.out.println("Empty Entry!" + msg);
+				  msg = din.readLine();
+				  System.out.println("Error ::" + msg+'\n');
+				  String empty_entry = din.readLine();
+			  }
+		  }                    
+      }
+      catch (IOException x ) 
+      {
+    	  System.out.println("Problem encountered -> " + x );
+      }
+   }	
 }
 
 

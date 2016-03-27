@@ -3,11 +3,9 @@
 //     convert System.out.println from showTrains() and findPassword() to String 
 //
 // Type wrong soli. lazy modify liao
-package netwokingProtocolDesign;
+package SY;
 import java.util.*;
 import javax.swing.JOptionPane;
-
-
 import java.io.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -83,23 +81,11 @@ public class Users {
 			    s = new String ("++");
 	   			//s = s + (c.priceString());
 	   		}
-	   		if(!(String.valueOf(nID)).equals(String.valueOf(c.id)) && (nPassword.equals(c.password)))
-	   		{
-	   			found = 0;
-	   			s = new String("--, LU");
-	   		}
-	   		if(!(nPassword.equals(c.password)) && (String.valueOf(nID)).equals(String.valueOf(c.id)))
-	   		{
-	   			found = 0;
-	   			s = new String("--, LP");
-	   		}
-	   		
 	    }
-		//if (found==0)
-		//	s = new String("--");
+		if (found==0)
+			s = new String("--");
 		return s;
 	 }
-
 
 
   /*************************************** main removed from here and is split between dclient2.java and deserver.java ********

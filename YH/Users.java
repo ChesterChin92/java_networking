@@ -3,11 +3,10 @@
 //     convert System.out.println from showTrains() and findPassword() to String 
 //
 // Type wrong soli. lazy modify liao
-package netwokingProtocolDesign;
+//package NetworkFinal;
+package YH;
 import java.util.*;
 import javax.swing.JOptionPane;
-
-
 import java.io.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -58,7 +57,11 @@ public class Users {
   }
 
   public String toString() {
-    return new String(id+"\t\t"+password);
+    //return new String(id+"\t\t"+password);
+	  
+	  //return format string will be nice
+	  return String.format("%4d	%20s", id, password); 
+
   }
   
   public String priceString(){
@@ -67,7 +70,12 @@ public class Users {
    
   //Display customer records
   public String showUser() {
-  	String s = new String ("id\t\tpassword\n");
+  	//String s = new String ("id\t\tpassword\n");
+	//here format title also. Spacing must be equal to toString method %4s[tab]$20s[tab]%20s and etc...
+	  String s = String.format("%4s	%20s\n", "id", "password");
+	  String t = String.format("%4s	%20s\n", "----", "----------");
+	  s = s + t;
+	  
     for (Users c: getUser())
       s = s + c.toString() + System.lineSeparator() ;
     //s = s + "total "+ ticket.size()+" registered customers";
@@ -99,54 +107,5 @@ public class Users {
 		//	s = new String("--");
 		return s;
 	 }
-
-
-
-  /*************************************** main removed from here and is split between dclient2.java and deserver.java ********
-  //This main is for testing.
-  public static void main(String[] args) {
-    
-    UserRec2a userdb = new UserRec2a();
-
-    userdb.showRecs();
-
- 	userdb.addRec(888, "FredNurg", "fnurg4");
-    userdb.addRec(555, "JohnPolan", "jpolan8");
-    userdb.addRec(333, "RonMulan", "rmulan5");
-
-    userdb.showRecs();
-	
-	
-	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-	
-	try {
-	while(true) {
-		System.out.println("Please enter your request");
-		String request = in.readLine();
-		if (request.equals("findUser")) {
-			System.out.println("Enter user name to search ");
-    		String s = in.readLine();
-    		userdb.findPassword(s);
-		} else if (request.equals("viewUsers")) {
-			userdb.showRecs();
-		} else if (request.equals("newUser")) {
-			System.out.println("Enter new user name: ");
-    		String n = in.readLine();
-    		System.out.println("Enter password: ");
-    		String p = in.readLine();
-			userdb.addRec(888, n, p);
-		} else if (request.equals("logout")) {
-			System.out.println("Please come back again soon ");
-			break;
-		} else {
-			System.out.println("Unrecognised Input, please enter again ");
-		}
-	}        
-	}
-    catch (IOException x ) {
-         System.out.println("Problem encountered -> " + x );
-    }
-}
-****************************************/
 
 }

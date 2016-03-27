@@ -7,7 +7,8 @@
 
 
 // Type wrong soli. lazy modify liao
-package netwokingProtocolDesign;
+//package NetworkFinal;
+package YH;
 import java.net.*;
 import java.io.*;
 import java.util.*;
@@ -19,9 +20,6 @@ public class dserver2a {
    {
     Trains ticket = new Trains();
     Users user = new Users();
-    
-    byte [] buff = new byte[500];	
-    int len = 0;					
     //ticket.showTicket();
 
     //ticket.addTicket(7101, "Hexham", "Poland", 11);
@@ -44,61 +42,49 @@ public class dserver2a {
          DataInputStream din = new DataInputStream(sin);
 	     PrintStream pout = new PrintStream(sout);
 
-         pout.println("Hello client, msg from server.");
+         pout.println("hello, Good morning");
          String msg = din.readLine();
 		 System.out.println("Msg received:" + msg);
 		 
 		 
 		while(true) 
 		{
-//			pout.println("Please enter your request: login/viewAllUser/searchPrice/viewAllTicket/newTicket/logout");
-//			sout.write(user.showUser().toString().getBytes());
-//			/searchPrice/searchDate/searchDateTime/viewAllTicket/newTicket/newDateTicket/
-			sout.write("Please enter your request: \n1.login \n2.viewAllUser \n3.searchPrice \n4.searchDate \n5.searchDateTime \n4.viewAllTicket \n5.newTicket \n6.newDateTicket \n7.logout".getBytes());
-			 len = sin.read(buff);
-		      msg = new String(buff, 0, len);
-			
-//			msg = din.readLine();
+			pout.println("Please enter your request: login/viewAllUser/searchPrice/searchDate/searchDateTime/viewAllTicket/newTicket/newDateTicket/logout");
+			msg = din.readLine();
 			 System.out.println("Msg received:" + msg);
-			 
-			 
-			 
-			 
 			if (msg.equals("searchPrice")) 
 			{
-				 System.out.println("Msg received - Inside search Price") ;
 				pout.println("Enter ticket id to search ");
 	    		msg = din.readLine();
-	    		 System.out.println("Msg typed by user:" + msg);	    		
 	    		//pout.println(ticket.searchPrice(Integer.parseInt(msg)));
 				sout.write(ticket.searchPrice(Integer.parseInt(msg)).toString().getBytes());
-			} 
-			else if (msg.equals("viewAllTicket")) 
-			{
-				pout.println(ticket.showTicket());
-			} 
-			
+			}
 			else if (msg.equals("searchDate")) 
 			{
-				pout.print("Enter ticket id to search :");
+				pout.println("Enter ticket id to search ");
 	    		msg = din.readLine();
 	    		//pout.println(ticket.searchDate(Integer.parseInt(msg)));	    		
 				sout.write(ticket.searchDate(Integer.parseInt(msg)).toString().getBytes());
 			}
 			else if (msg.equals("searchDateTime")) 
 			{
-				pout.print("Enter ticket id to search :");
+				pout.println("Enter ticket id to search ");
 	    		msg = din.readLine();
 	    		//pout.println(ticket.searchDateTime(Integer.parseInt(msg)));
 				sout.write(ticket.searchDateTime(Integer.parseInt(msg)).toString().getBytes());
 			}
+			else if (msg.equals("viewAllTicket")) 
+			{
+				sout.write(ticket.showTicket().toString().getBytes());
+				//pout.println(ticket.showTicket());
+			} 
 			else if (msg.equals("newTicket")) 
 			{
-				pout.print("Enter new ticket id: ");
+				pout.println("Enter new ticket id: ");
 	    		String l = din.readLine();
-				pout.print("Enter new ticket depart location: ");
+				pout.println("Enter new ticket depart location: ");
 	    		String n = din.readLine();
-	    		pout.print("Enter destination: ");
+	    		pout.println("Enter destination: ");
 	    		String p = din.readLine();
 	    		pout.println("Enter date: ");
 	    		String q = din.readLine();
@@ -130,8 +116,7 @@ public class dserver2a {
 						
 				}
 				else{
-					//temperary measure fix later.
-					if (isInteger(a)){
+					if (!a.equals("0.0")){
 						pout.println(user.checkLogin(Integer.parseInt(a), b));	
 					}
 					else{
@@ -158,32 +143,10 @@ public class dserver2a {
 				pout.println("Unrecognised Input, please enter again "+ '\n');
 			}
 		}
-		
-		
    }
    catch (IOException x ) {
          System.out.println("Sockets problem: " + x );
    }
   }
-   
-   
-
-   public static boolean isInteger(String s) {
-      boolean isValidInteger = false;
-      try
-      {
-         Integer.parseInt(s);
- 
-         // s is a valid integer
- 
-         isValidInteger = true;
-      }
-      catch (NumberFormatException ex)
-      {
-         // s is not an integer
-      }
- 
-      return isValidInteger;
-   }
 }
 

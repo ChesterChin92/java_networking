@@ -6,7 +6,7 @@
 
 // Type wrong soli. lazy modify liao
 //package NetworkFinal;
-package netwokingProtocolDesign;
+package YH;
 import java.util.*;
 import javax.swing.JOptionPane;
 import java.io.*;

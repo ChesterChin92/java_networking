@@ -1,0 +1,5 @@
+7101		London		Dublin		1.0
+7102		Malaysia	London		110.0
+7103		Africa		London		11.04
+7104		Australia	penang		20.0
+7105		Taiwan		Penang		90.0
