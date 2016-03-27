@@ -45,10 +45,10 @@ public class dclient2a
 		  while (true)	
 		  {
 			  
-			  len = sin.read(buff);
+			  len = sin.read(buff); //Read From server
 			  msg = new String(buff, 0, len);
 //			  msg = din.readLine();	// from srv: "Please enter your request"
-			  System.out.print("\nInfo ::" + msg+'\n');
+			  System.out.print("\nM-Info ::" + msg+'\n');
 			  System.out.print("Command ~");
 			  
 			  msg = in.readLine();	// input from keyboard
@@ -57,9 +57,10 @@ public class dclient2a
 			  if (msg.equals("searchPrice")) 
 			  {
 				  msg = din.readLine();	// from srv" "Enter ticket id to search "
-				  System.out.println("Info ::" + msg);
+				  System.out.print("Info ::" + msg);
 				  msg = in.readLine();	// input from keyboard user input ticket id
 				  pout.println(msg);
+				  System.out.println("Msg from pout ::" + msg);
 				  /*msg = din.readLine();	// from srv" ticket id found info
 				  System.out.print("Data ::" + msg);*/
 				  
@@ -96,8 +97,11 @@ public class dclient2a
 			  }
 			  else if (msg.equals("viewAllTicket")) 
 			  {
-				  msg = din.readLine();	// from srv" all users info
-				  System.out.println("Data ::" + msg);
+//				  msg = din.readLine();	// from srv" all users info
+//				  System.out.print("\nData ::" + msg);
+				  len = sin.read(buff);
+			      msg = new String(buff, 0, len);
+				  System.out.print(msg);
 			  }
 			  else if (msg.equals("newTicket")) 
 			  {
@@ -179,7 +183,7 @@ public class dclient2a
 					//Do something here
 //					 System.out.println("Empty Entry!" + msg);
 					  msg = din.readLine();
-					  System.out.println("Error ::" + msg+'\n');
+					  System.out.println("\nError ::" + msg+'\n');
 					  String empty_entry = din.readLine();
 				}
 			}                    

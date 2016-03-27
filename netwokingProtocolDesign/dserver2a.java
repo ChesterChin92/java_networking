@@ -55,11 +55,11 @@ public class dserver2a {
 //			sout.write(user.showUser().toString().getBytes());
 //			/searchPrice/searchDate/searchDateTime/viewAllTicket/newTicket/newDateTicket/
 			sout.write("Please enter your request: \n1.login \n2.viewAllUser \n3.searchPrice \n4.searchDate \n5.searchDateTime \n4.viewAllTicket \n5.newTicket \n6.newDateTicket \n7.logout".getBytes());
-			 len = sin.read(buff);
-		      msg = new String(buff, 0, len);
+			msg = din.readLine();
+			 System.out.println("Msg received:" + msg);
 			
 //			msg = din.readLine();
-			 System.out.println("Msg received:" + msg);
+//			 System.out.println("Msg received:" + msg);
 			 
 			 
 			 
@@ -75,30 +75,34 @@ public class dserver2a {
 			} 
 			else if (msg.equals("viewAllTicket")) 
 			{
-				pout.println(ticket.showTicket());
+				
+				sout.write(ticket.showTicket().toString().getBytes());
+//				pout.println(ticket.showTicket()); //Multiline cannot use pout :-(
+				//pout.println("Press enter to continue.");
+	    		//msg = din.readLine();
 			} 
 			
 			else if (msg.equals("searchDate")) 
 			{
-				pout.print("Enter ticket id to search :");
+				pout.println("Enter ticket id to search :");
 	    		msg = din.readLine();
 	    		//pout.println(ticket.searchDate(Integer.parseInt(msg)));	    		
 				sout.write(ticket.searchDate(Integer.parseInt(msg)).toString().getBytes());
 			}
 			else if (msg.equals("searchDateTime")) 
 			{
-				pout.print("Enter ticket id to search :");
+				pout.println("Enter ticket id to search :");
 	    		msg = din.readLine();
 	    		//pout.println(ticket.searchDateTime(Integer.parseInt(msg)));
 				sout.write(ticket.searchDateTime(Integer.parseInt(msg)).toString().getBytes());
 			}
 			else if (msg.equals("newTicket")) 
 			{
-				pout.print("Enter new ticket id: ");
+				pout.println("Enter new ticket id: ");
 	    		String l = din.readLine();
-				pout.print("Enter new ticket depart location: ");
+				pout.println("Enter new ticket depart location: ");
 	    		String n = din.readLine();
-	    		pout.print("Enter destination: ");
+	    		pout.println("Enter destination: ");
 	    		String p = din.readLine();
 	    		pout.println("Enter date: ");
 	    		String q = din.readLine();

@@ -152,7 +152,7 @@ public class Trains {
 			  "----", "----------", "----------", "----------", "----------", "----------");
 	  s = s + t;
     for (Trains c: getTicket())
-      s = s + c.toString() + System.lineSeparator() ;
+      s = s + c.toString() + '\n' ;
       //  s = s + c.toString() ;
 
     //s = s + "total "+ ticket.size()+" registered customers";
