@@ -69,7 +69,7 @@ public class Users {
   public String showUser() {
   	String s = new String ("id\t\tpassword\n");
     for (Users c: getUser())
-      s = s + c.toString() + System.lineSeparator() ;
+      s = s + c.toString() + '\n' ;
     //s = s + "total "+ ticket.size()+" registered customers";
     return s;
  }

@@ -16,7 +16,7 @@ public class dclient2a
 {
    public static void main(String[] args) 
    {
-      byte [] buff = new byte[500];	
+      byte [] buff = new byte[2000];	
       int len = 0;					
       String message = null;	
 	  String outbuff = null;	
@@ -44,15 +44,23 @@ public class dclient2a
 	    
 		  while (true)	
 		  {
+			  //Introduce a delay to give some buffer time for server, solves msg off sync issues
+			  try {
+				    Thread.sleep(1000);                 //1000 milliseconds is one second.
+				} catch(InterruptedException ex) {
+				    Thread.currentThread().interrupt();
+				}
 			  
 			  len = sin.read(buff); //Read From server
 			  msg = new String(buff, 0, len);
 //			  msg = din.readLine();	// from srv: "Please enter your request"
-			  System.out.print("\nM-Info ::" + msg+'\n');
+			  System.out.print("\nMain Menu -" + msg+'\n');
 			  System.out.print("Command ~");
 			  
 			  msg = in.readLine();	// input from keyboard
 			  pout.println(msg);
+			  System.out.print("Converted output ~" +"From:"+ msg+ " TO:" +convert(msg));
+			  msg = convert(msg);//Converting from numbers to text for back end
 			  
 			  if (msg.equals("searchPrice")) 
 			  {
@@ -101,7 +109,13 @@ public class dclient2a
 //				  System.out.print("\nData ::" + msg);
 				  len = sin.read(buff);
 			      msg = new String(buff, 0, len);
-				  System.out.print(msg);
+				  System.out.println(msg);
+				  
+				  try {
+					    Thread.sleep(1500);                 //1000 milliseconds is one second.
+					} catch(InterruptedException ex) {
+					    Thread.currentThread().interrupt();
+					}
 			  }
 			  else if (msg.equals("newTicket")) 
 			  {
@@ -135,7 +149,7 @@ public class dclient2a
 				  msg = in.readLine();	// input from keyboard price
 				  pout.println(msg);
 				}
-			  else if(msg.equals("newDateTicket"))
+			  else if(msg.equals("BuyDateTicket"))
 			  {				  
 				  msg = din.readLine();	// from srv" "Enter ticket ID:  "
 				  System.out.println("Info ::" + msg);
@@ -192,8 +206,37 @@ public class dclient2a
         {
         	System.out.println("Problem encountered -> " + x );
 		}
-   	}	
-}
+   	}	//end of main
+   
+   public static String convert(String input){
+	   String output = "";
+//	   \n1.login \n2.viewAllUser \n3.searchPrice \n4.searchDate \n5.searchDateTime \n6.viewAllTicket \n7.newTicket \n8.buyDateTicket(Saver) \n9.logout
+	   switch(input){
+	   case "1":  output = "login";
+       			break;
+	   case "2":  output = "viewAllUser";
+			break;
+	   case "3":  output = "searchPrice";
+			break;
+	   case "4":  output = "searchDate";
+			break;
+	   case "5":  output = "searchDateTime";
+			break;
+	   case "6":  output = "viewAllTicket";
+			break;
+	   case "7":  output = "newTicket";
+			break;
+	   case "8":  output = "buyDateTicket";
+		break;
+	   case "9":  output = "logout";
+		break;
+	   default: output = "Invalid conversion";
+       break;
+	   }
+	   return output;
+   }//end of convert
+   
+}//end of class
 
 
 

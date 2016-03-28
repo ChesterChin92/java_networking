@@ -77,6 +77,7 @@ public class dserver2a {
 			{
 				sout.write(ticket.showTicket().toString().getBytes());
 				//pout.println(ticket.showTicket());
+				
 			} 
 			else if (msg.equals("newTicket")) 
 			{
@@ -101,6 +102,7 @@ public class dserver2a {
 	    		pout.println("Enter ticket Date: ");
 	    		String y = din.readLine();
 	    		pout.println(ticket.addDateTicket(Integer.parseInt(x), y));
+	    		
 			}
 			else if(msg.equals("login"))
 			{

@@ -20,7 +20,7 @@ public class dserver2a {
     Trains ticket = new Trains();
     Users user = new Users();
     
-    byte [] buff = new byte[500];	
+    byte [] buff = new byte[2000];	
     int len = 0;					
     //ticket.showTicket();
 
@@ -54,17 +54,17 @@ public class dserver2a {
 //			pout.println("Please enter your request: login/viewAllUser/searchPrice/viewAllTicket/newTicket/logout");
 //			sout.write(user.showUser().toString().getBytes());
 //			/searchPrice/searchDate/searchDateTime/viewAllTicket/newTicket/newDateTicket/
-			sout.write("Please enter your request: \n1.login \n2.viewAllUser \n3.searchPrice \n4.searchDate \n5.searchDateTime \n4.viewAllTicket \n5.newTicket \n6.newDateTicket \n7.logout".getBytes());
+			sout.write("Please enter your request: \n1.login \n2.viewAllUser \n3.searchPrice \n4.searchDate \n5.searchDateTime \n4.viewAllTicket \n5.newTicket \n6.buyDateTicket(Saver) \n7.logout".toString().getBytes());
 			msg = din.readLine();
 			 System.out.println("Msg received:" + msg);
 			
 //			msg = din.readLine();
 //			 System.out.println("Msg received:" + msg);
 			 
+			 msg = convert(msg); //Convert from numbers to text or protocol
 			 
 			 
-			 
-			if (msg.equals("searchPrice")) 
+			if (convert(msg).equals("searchPrice")) 
 			{
 				 System.out.println("Msg received - Inside search Price") ;
 				pout.println("Enter ticket id to search ");
@@ -80,6 +80,7 @@ public class dserver2a {
 //				pout.println(ticket.showTicket()); //Multiline cannot use pout :-(
 				//pout.println("Press enter to continue.");
 	    		//msg = din.readLine();
+				 System.out.println("\nMsg sent:" + ticket.showTicket().toString() );
 			} 
 			
 			else if (msg.equals("searchDate")) 
@@ -120,7 +121,11 @@ public class dserver2a {
 	    		String y = din.readLine();
 	    		pout.println(ticket.addDateTicket(Integer.parseInt(x), y));
 			}
-			else if(msg.equals("login"))
+			else if(msg.equals("newDateTimeTicket"))
+			{								
+	    		//
+			}
+			else if(convert(msg).equals("login"))
 			{
 				pout.println("Enter user id: ");
 				String a = din.readLine();
@@ -161,15 +166,42 @@ public class dserver2a {
 			{
 				pout.println("Unrecognised Input, please enter again "+ '\n');
 			}
-		}
+		} // end of while loop
 		
 		
-   }
+   }//end of try
    catch (IOException x ) {
          System.out.println("Sockets problem: " + x );
-   }
-  }
+   }//end of catch
+  } //end of main
    
+   //A function to convert from user input to protocol code
+   public static String convert(String input){
+	   String output = "";
+	   switch(input){
+	   case "1":  output = "login";
+       			break;
+	   case "2":  output = "viewAllUser";
+			break;
+	   case "3":  output = "searchPrice";
+			break;
+	   case "4":  output = "searchDate";
+			break;
+	   case "5":  output = "searchDateTime";
+			break;
+	   case "6":  output = "viewAllTicket";
+			break;
+	   case "7":  output = "newTicket";
+			break;
+	   case "8":  output = "buyDateTicket";
+		break;
+	   case "9":  output = "logout";
+		break;
+	   default: output = "Invalid conversion";
+       break;
+	   }
+	   return output;
+   }//end of convert
    
 
    public static boolean isInteger(String s) {
@@ -188,6 +220,6 @@ public class dserver2a {
       }
  
       return isValidInteger;
-   }
+   }//end of isInteger
 }
 
