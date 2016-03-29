@@ -157,7 +157,7 @@ public class Trains {
 		// here format title also. Spacing must be equal to toString method
 		// %4s[tab]$20s[tab]%20s and etc...
 		String s = String.format("%4s	%20s	%20s	%10s	%10s	%10s\n", "id", "depart", "destination", "date",
-				"time", "price");
+				"time(Saver)", "price");
 		String t = String.format("%4s	%20s	%20s	%10s	%10s	%10s\n", "----", "----------", "----------",
 				"----------", "----------", "----------");
 		s = s + t;
@@ -191,11 +191,36 @@ public class Trains {
 				found = 1;
 				getDateTicket.add(new Trains(useNewDateTicketID(), ticketID, ticketDate));
 				addDateTicketList();
-				s = "XX, " + newDateTicketID;
+				s = "XX, " + newDateTicketID+"000"; //Return barcode
 			}
 		}
 		if (found == 0)
 			s = new String("--, PD");
+		return s;
+	}
+	
+	
+	public String addDateTimeTicket(int ticketID, String ticketDate, String ticketTime) {
+		// int ans = 0;
+		int found = 0;
+		String s = new String();
+		for (Trains c : getTicket()) {
+			// s = String.valueOf(ticketID) + "||" + String.valueOf(e.id);
+			// s += e.id + e.date + "||";
+
+			/*
+			 * if(ticketID == c.id) { s = "true"; break; } else { s = "false"; }
+			 */
+
+			if ((String.valueOf(ticketID)).equals(String.valueOf(c.id)) && (ticketDate.equals(c.date) && (ticketTime.equals(c.time))) ) {
+				found = 1;
+				getDateTicket.add(new Trains(useNewDateTicketID(), ticketID, ticketDate)); //May add time as well into the record
+				addDateTicketList();
+				s = "XX, " + newDateTicketID+"000"; //Return barcode
+			}
+		}
+		if (found == 0)
+			s = new String("--, PT");
 		return s;
 	}
 

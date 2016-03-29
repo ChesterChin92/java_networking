@@ -14,11 +14,13 @@ import javax.swing.JOptionPane;
 
 public class dclient2a {
 	public static void main(String[] args) {
-		byte[] buff = new byte[2000];
+		byte[] buff = new byte[2000]; //Original 500, increase to 2000 due to length of response is more than 500
 		int len = 0;
-		String message = null;
-		String outbuff = null;
-
+		boolean loginStatus = false;
+		
+		String message = null; //Not used, kept for debug
+		String outbuff = null; //Not used, kept for debug
+		String tempHolder = null;
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
 		try {
@@ -49,31 +51,51 @@ public class dclient2a {
 				msg = new String(buff, 0, len);
 				System.out.print("\nMain Menu -" + msg + '\n');
 				System.out.print("Command ~");
-
+				
 				msg = in.readLine(); // input from keyboard
-				pout.println(msg);
+				
+				//Add some logic here, if session fail, do not send msg to server.
+				if (sessionChk(convert(msg),loginStatus) == false){
+					//Do not send 
+					tempHolder = msg;
+					pout.println("NoSession");
+					len = sin.read(buff); // Read From server
+					msg = new String(buff, 0, len);
+					System.out.print("Info ::" + convert(msg)+'\n'); //used for debug server response, right now it is suppressed
+					msg = tempHolder;
+				}
+				else if (sessionChk(convert(msg),loginStatus) == true){
+					pout.println(msg);	
+				}
+				
+				
 				System.out.print("Converted output " + "From:" + msg + " TO:" + convert(msg) + '\n');
 				msg = convert(msg);// Converting from numbers to text for back
 									// end
-
-				if (msg.equals("searchPrice")) {
+			
+				
+				
+				if (msg.equals("searchPrice")) { //Search Price
 					msg = din.readLine(); // from srv" "Enter ticket id to
 											// search "
 					System.out.print("Info ::" + msg);
 					
 					msg = in.readLine(); // input from keyboard user input
 											// ticket id
+					
 					pout.println(msg);
 
+					//Add validation and handling for errors.
+					
 					len = sin.read(buff);
 					msg = new String(buff, 0, len);
 					System.out.print("---Search Price LIST---" + '\n' + msg);
 
 				} 
-				else if (msg.equals("searchDate")) {
+				else if (msg.equals("searchDate")) { //Search for date
 					msg = din.readLine(); // from srv" "Enter ticket id to
 											// search "
-					System.out.println("Info ::" + msg);
+					System.out.print("Info ::" + msg);
 					
 					msg = in.readLine(); // input from keyboard user input
 											// ticket id
@@ -83,10 +105,10 @@ public class dclient2a {
 					msg = new String(buff, 0, len);
 					System.out.print("---Search Date LIST---" + '\n' + msg);
 				} 
-				else if (msg.equals("searchDateTime")) {
+				else if (msg.equals("searchDateTime")) { //Search for date time
 					msg = din.readLine(); // from srv" "Enter ticket id to
 											// search "
-					System.out.println("Info ::" + msg);
+					System.out.print("Info ::" + msg);
 					
 					msg = in.readLine(); // input from keyboard user input
 											// ticket id
@@ -97,7 +119,8 @@ public class dclient2a {
 					System.out.print("---Search Date Time LIST---" + '\n' + msg);
 					
 				} 
-				else if (msg.equals("viewAllTicket")) {
+				else if (msg.equals("viewAllTicket")) { //show all ticket
+					
 					len = sin.read(buff); //Response from server
 					msg = new String(buff, 0, len);
 					System.out.println(msg);
@@ -109,7 +132,8 @@ public class dclient2a {
 						Thread.currentThread().interrupt();
 					}
 				} 
-				else if (msg.equals("newTicket")) {
+				else if (msg.equals("newTicket") && (loginStatus == true)) { //Add new ticket 
+					
 					//TODO implement validation if possible
 					msg = din.readLine(); // from srv" "Enter new ticket id: "
 					System.out.println("Info ::" + msg);
@@ -147,7 +171,8 @@ public class dclient2a {
 					msg = in.readLine(); // input from keyboard price
 					pout.println(msg);
 				} 
-				else if (msg.equals("buyDateTicket")) {
+				else if (msg.equals("buyDateTicket")&& (loginStatus == true)) { //buy normal ticket
+					
 					msg = din.readLine(); // from srv" "Enter ticket ID: "
 					System.out.print("Info ::" + msg);
 					
@@ -159,9 +184,19 @@ public class dclient2a {
 					
 					msg = in.readLine(); // input from keyboard date
 					pout.println(msg);
+					
+					
+					msg = din.readLine(); // from server XX or --, PD
+					
+					if (msg.equals("--, PD")){
+						System.out.print("Error ::" + convert(msg));	
+					}
+					else{
+						System.out.print("Info :: Ticket number :" + msg.substring(4));
+					}
 					
 				} 
-				else if (msg.equals("buyDateTimeTicket")) { //
+				else if (msg.equals("buyDateTimeTicket")  && (loginStatus == true)) { // buy Saver ticket
 					msg = din.readLine(); // from srv" "Enter ticket ID: "
 					System.out.print("Info ::" + msg);
 					
@@ -173,8 +208,23 @@ public class dclient2a {
 					
 					msg = in.readLine(); // input from keyboard date
 					pout.println(msg);
+					
+					msg = din.readLine(); // from srv" "Enter time: "
+					System.out.print("Info ::" + msg);
+					
+					msg = in.readLine(); // input from keyboard date
+					pout.println(msg);
+					
+					msg = din.readLine(); // from server XX or --, PD
+					
+					if (msg.equals("--, PT")){
+						System.out.print("Error ::" + convert(msg));	
+					}
+					else{
+						System.out.print("Info :: Ticket number :" + msg.substring(4) + '\n');
+					}
 				}
-				else if (msg.equals("login")) {
+				else if (msg.equals("login") && (loginStatus == false)) { //Login
 					msg = din.readLine(); // from srv" "Enter user id: "
 					System.out.print('\n' + "Info ::" + msg);
 					msg = in.readLine(); // input from keyboard user id
@@ -194,24 +244,43 @@ public class dclient2a {
 						System.out.println("Error ::" + convert(msg));
 					} else if (msg.equals("++")) {
 						System.out.println("Status ::" + convert(msg));
-						// Implement a flag here.
+						loginStatus = true;// Implement a flag here.
 					}
-				} else if (msg.equals("viewAllUser")) {
+				} else if (msg.equals("viewAllUser")) { //View all user
 					len = sin.read(buff);
 					msg = new String(buff, 0, len);
 					System.out.print("---USER LIST---" + '\n' + msg);
 
-				} else if (msg.equals("LO")) {
+				} else if (msg.equals("LO") && (loginStatus == false)) {
 					msg = din.readLine(); // from srvPlease come back again
 											// soon:
+					loginStatus = false;
 					System.out.println("Info ::" + msg);
-					break;
+					
 				} else if (msg.equals("--, QE")) {
 					msg = din.readLine();
 					System.out.println("\nError ::" + convert(msg) + '\n');
 					// String empty_entry = din.readLine();
 				} else{
-					System.out.println("\nFatal Error"+'\n');
+					
+					
+					if (msg.equals("login") && loginStatus == true){
+						System.out.println("You have already logged in.");	
+					}
+					else if (msg.equals("buyDateTicket") && loginStatus == false){
+						System.out.println("You need to login first.");	
+					}
+					
+					else if (msg.equals("buyDateTimeTicket")  && (loginStatus == false)){
+						System.out.println("You need to login first.");	
+					}
+					else if (msg.equals("newTicket") && (loginStatus == false)) {
+						System.out.println("You need to login first.");	
+					}
+					else{
+						System.out.println("\nFatal Error"+'\n');	
+					}
+					
 				} 
 			} // end of while loop
 		} catch (IOException x) {
@@ -219,6 +288,30 @@ public class dclient2a {
 		} // end of catch IO
 	} // end of main
 
+	
+	public static boolean sessionChk(String input, boolean loginStatus){
+		String output = "";
+		if (input.equals("login") && loginStatus == true)
+		{
+			return false;
+		}
+		if (input.equals("newTicket") && loginStatus == false)
+		{
+			return false;
+		}
+		if (input.equals("buyDateTicket") && loginStatus == false)
+		{
+			return false;
+		}
+		if (input.equals("buyDateTimeTicket") && loginStatus == false)
+		{
+			return false;
+		}
+		else{
+			return true;
+		}
+		
+	}
 	
 	// A function to convert from user input to protocol code
 	public static String convert(String input) {
@@ -263,6 +356,9 @@ public class dclient2a {
 			output = "OK";
 			break;
 		// Error Messages
+		case "--, LN":
+			output = "No Session";
+			break;
 		case "--, LU":
 			output = "Invalid user ID in login";
 			break;
@@ -278,11 +374,11 @@ public class dclient2a {
 		case "--, PS":
 			output = "Ticket ID sold out";
 			break;
-		case "--, PD":
+		case "--, PD": //Used in buy ticket 
 			output = "Ticket date not found";
 			break;
-		case "--, PT":
-			output = "Tcked ID time not found";
+		case "--, PT": //Used in but ticket (Saver)
+			output = "Ticked time not found";
 			break;
 		case "--, QE":
 			output = "Unrecognised Input, please enter again ";

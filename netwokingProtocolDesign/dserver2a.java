@@ -20,7 +20,7 @@ public class dserver2a {
 		Trains ticket = new Trains();
 		Users user = new Users();
 
-		byte[] buff = new byte[2000];
+		byte[] buff = new byte[2000]; //Original 500, increase to 2000 due to length of response is more than 500
 		int len = 0;
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -227,18 +227,21 @@ public class dserver2a {
 					}
 
 					else if (msg.equals("searchDate")) { //Search for date
+						
 						pout.println("Enter ticket id to search :");
 						msg = din.readLine();
 						// pout.println(ticket.searchDate(Integer.parseInt(msg)));
 						sout.write(ticket.searchDate(Integer.parseInt(msg)).toString().getBytes());
 					} 
 					else if (msg.equals("searchDateTime")) { //Search for date and time
+						
 						pout.println("Enter ticket id to search :");
 						msg = din.readLine();
 						// pout.println(ticket.searchDateTime(Integer.parseInt(msg)));
 						sout.write(ticket.searchDateTime(Integer.parseInt(msg)).toString().getBytes());
 					} 
 					else if (msg.equals("newTicket")) { // New Ticket to database
+						
 						pout.println("Enter new ticket id: ");
 						String l = din.readLine();
 						pout.println("Enter new ticket depart location: ");
@@ -254,18 +257,25 @@ public class dserver2a {
 						ticket.addTicket(Integer.parseInt(l), n, p, q, r, Double.parseDouble(s));
 					} 
 					else if (msg.equals("buyDateTicket")) { //buy Ticket
+						
 						pout.println("Enter ticket ID: ");
 						String x = din.readLine();
 						pout.println("Enter ticket Date: ");
 						String y = din.readLine();
-						pout.println(ticket.addDateTicket(Integer.parseInt(x), y));
+						pout.println(ticket.addDateTicket(Integer.parseInt(x), y)); //Add and send response back to client XX or --, PD
 					} 
 					else if (msg.equals("buyDateTimeTicket")) { //buy Ticket Savers
+						
 						pout.println("Enter ticket ID: ");
 						String x = din.readLine();
+						
 						pout.println("Enter ticket Date: ");
 						String y = din.readLine();
-						pout.println(ticket.addDateTicket(Integer.parseInt(x), y));
+						
+						pout.println("Enter ticket Time: ");
+						String z = din.readLine();
+						
+						pout.println(ticket.addDateTimeTicket(Integer.parseInt(x), y, z)); //Add and send response back to client XX or --, PT
 					} 
 					else if (msg.equals("login")) {
 						pout.println("Enter user id: ");
