@@ -21,11 +21,11 @@ public class dserver6 {
 			SocketThread t = new SocketThread(socket);
 			t.start();    	 
          }
-      }
+      }//end of try
       catch (IOException x ) {
          System.out.println("Sockets problem: " + x );
-      }
-   }
+      }//end of catch
+   }//end of main
 
    private static class SocketThread extends Thread {
         private Socket socket;
@@ -42,12 +42,12 @@ public class dserver6 {
          	pout.println("hello, \r\nGood morning");
          	String msg = din.readLine();
 		 	System.out.println("Msg received:" + msg);             
-		  }
+		  }// end of try
       	  catch (IOException x ) {
          	System.out.println("Sockets problem: " + x );
-      	  }
-        }
-   }
+      	  }// end of catch
+        }//end of run
+   }//end of socket thread
 
 }
 
