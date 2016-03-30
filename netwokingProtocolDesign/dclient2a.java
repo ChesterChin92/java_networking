@@ -68,8 +68,9 @@ public class dclient2a {
 					pout.println(msg);	
 				}
 				
+				//Debug conversion and original msg8
 				
-				System.out.print("Converted output " + "From:" + msg + " TO:" + convert(msg) + '\n');
+				//System.out.print("Converted output " + "From:" + msg + " TO:" + convert(msg) + '\n');
 				msg = convert(msg);// Converting from numbers to text for back
 									// end
 			
@@ -227,11 +228,13 @@ public class dclient2a {
 				else if (msg.equals("login") && (loginStatus == false)) { //Login
 					msg = din.readLine(); // from srv" "Enter user id: "
 					System.out.print('\n' + "Info ::" + msg);
+					
 					msg = in.readLine(); // input from keyboard user id
 					pout.println(msg);
+					
 					msg = din.readLine(); // from srv" "Enter password: "
-
 					System.out.print("Info ::" + msg);
+					
 					msg = in.readLine(); // input from keyboard password
 					pout.println(msg);
 
@@ -242,16 +245,21 @@ public class dclient2a {
 					}
 					if (msg.equals("--, LU")) {
 						System.out.println("Error ::" + convert(msg));
-					} else if (msg.equals("++")) {
+					}  
+					if (msg.equals("++")) {
 						System.out.println("Status ::" + convert(msg));
 						loginStatus = true;// Implement a flag here.
 					}
+					else{
+						//Add debug here if needd
+					}
+					
 				} else if (msg.equals("viewAllUser")) { //View all user
 					len = sin.read(buff);
 					msg = new String(buff, 0, len);
 					System.out.print("---USER LIST---" + '\n' + msg);
 
-				} else if (msg.equals("LO") && (loginStatus == false)) {
+				} else if (msg.equals("LO") && (loginStatus == true)) {
 					msg = din.readLine(); // from srvPlease come back again
 											// soon:
 					loginStatus = false;
@@ -276,6 +284,9 @@ public class dclient2a {
 					}
 					else if (msg.equals("newTicket") && (loginStatus == false)) {
 						System.out.println("You need to login first.");	
+					}
+					else if (msg.equals("LO") ){
+						System.out.println("Login status cleared.");
 					}
 					else{
 						System.out.println("\nFatal Error"+'\n');	

@@ -41,134 +41,7 @@ public class dserver2a {
 	      }//end of catch
 		
 		
-//		try {
-//			ServerSocket server = new ServerSocket(2016);
-//			System.out.println("Server: Socket created");
-//			Socket socket = server.accept();
-//			System.out.println("Server:Connection accepted");
-//
-//
-//
-//			while (true) {
-//				OutputStream sout = socket.getOutputStream();
-//				InputStream sin = socket.getInputStream();
-//				DataInputStream din = new DataInputStream(sin);
-//				PrintStream pout = new PrintStream(sout);
-//
-//				pout.println("Hello client, msg from server.");
-//				String msg = din.readLine();
-//				System.out.println("Msg received:" + msg);
-//				// pout.println("Please enter your request:
-//				// login/viewAllUser/searchPrice/viewAllTicket/newTicket/logout");
-//				// sout.write(user.showUser().toString().getBytes());
-//				// /searchPrice/searchDate/searchDateTime/viewAllTicket/newTicket/newDateTicket/
-//				sout.write(
-//						"\n1.login \n2.viewAllUser \n3.searchPrice \n4.searchDate \n5.searchDateTime \n6.viewAllTicket \n7.newTicket \n8.buyDateTicket \n9.buyDateTimeTicket(Saver)\n10.logout"
-//								.toString().getBytes());
-//				msg = din.readLine();
-//				System.out.println("Msg received:" + msg);
-//
-//				msg = convert(msg); // Convert from numbers to text or protocol
-//
-//				if (msg.equals("searchPrice")) { //Search for Price
-//					
-//					System.out.println("Msg received - Inside search Price");
-//					pout.println("Enter ticket id to search ");
-//					
-//					msg = din.readLine(); 
-//					System.out.println("Msg typed by user:" + msg);
-//					// pout.println(ticket.searchPrice(Integer.parseInt(msg)));
-//					sout.write(ticket.searchPrice(Integer.parseInt(msg)).toString().getBytes());
-//				} 
-//				else if (msg.equals("viewAllTicket")) { //View All Ticket
-//
-//					sout.write(ticket.showTicket().toString().getBytes()); 
-//					System.out.println("\nMsg sent:" + ticket.showTicket().toString());
-//				}
-//
-//				else if (msg.equals("searchDate")) { //Search for date
-//					pout.println("Enter ticket id to search :");
-//					msg = din.readLine();
-//					// pout.println(ticket.searchDate(Integer.parseInt(msg)));
-//					sout.write(ticket.searchDate(Integer.parseInt(msg)).toString().getBytes());
-//				} 
-//				else if (msg.equals("searchDateTime")) { //Search for date and time
-//					pout.println("Enter ticket id to search :");
-//					msg = din.readLine();
-//					// pout.println(ticket.searchDateTime(Integer.parseInt(msg)));
-//					sout.write(ticket.searchDateTime(Integer.parseInt(msg)).toString().getBytes());
-//				} 
-//				else if (msg.equals("newTicket")) { // New Ticket to database
-//					pout.println("Enter new ticket id: ");
-//					String l = din.readLine();
-//					pout.println("Enter new ticket depart location: ");
-//					String n = din.readLine();
-//					pout.println("Enter destination: ");
-//					String p = din.readLine();
-//					pout.println("Enter date: ");
-//					String q = din.readLine();
-//					pout.println("Enter time: ");
-//					String r = din.readLine();
-//					pout.println("Enter price: ");
-//					String s = din.readLine();
-//					ticket.addTicket(Integer.parseInt(l), n, p, q, r, Double.parseDouble(s));
-//				} 
-//				else if (msg.equals("buyDateTicket")) { //buy Ticket
-//					pout.println("Enter ticket ID: ");
-//					String x = din.readLine();
-//					pout.println("Enter ticket Date: ");
-//					String y = din.readLine();
-//					pout.println(ticket.addDateTicket(Integer.parseInt(x), y));
-//				} 
-//				else if (msg.equals("buyDateTimeTicket")) { //buy Ticket Savers
-//					pout.println("Enter ticket ID: ");
-//					String x = din.readLine();
-//					pout.println("Enter ticket Date: ");
-//					String y = din.readLine();
-//					pout.println(ticket.addDateTicket(Integer.parseInt(x), y));
-//				} 
-//				else if (msg.equals("login")) {
-//					pout.println("Enter user id: ");
-//					String a = din.readLine();
-//					pout.println("Enter password: ");
-//					String b = din.readLine();
-//
-//					// Need to do some validation here before passing data to
-//					// user class.
-//
-//					if (a.equals("") || b.equals("")) {
-//						pout.println("Error in ID or Password, cannot enter empty entry.");
-//
-//					} else {
-//						// temporary measure fix later.
-//						if (isInteger(a)) {
-//							pout.println(user.checkLogin(Integer.parseInt(a), b));
-//						} else {
-//							pout.println("No User Found.");
-//						}
-//
-//					}
-//
-//					// String result = ;
-//					// pout.println(ticket.checkLogin(Integer.parseInt(a), b));
-//					// pout.println(user.checkLogin(Integer.parseInt(a), b));
-//				} 
-//				else if (msg.equals("viewAllUser")) { //View All User
-//					sout.write(user.showUser().toString().getBytes());
-//				} 
-//				else if (msg.equals("LO")) { //Logout
-//					pout.println("Please come back again soon ");
-//					break;
-//				} 
-//				else {
-//					pout.println("--, QE"); // QE, catch all nature
-//				}
-//			} // end of while loop
-//
-//		} // end of try
-//		catch (IOException x) {
-//			System.out.println("Sockets problem: " + x);
-//		} // end of catch
+
 	} // end of main
 
 	 private static class SocketThread extends Thread {
@@ -212,7 +85,7 @@ public class dserver2a {
 
 					if (msg.equals("searchPrice")) { //Search for Price
 						
-						System.out.println("Msg received - Inside search Price");
+						//System.out.println("Msg received - Inside search Price"); //For debug purpose
 						pout.println("Enter ticket id to search ");
 						
 						msg = din.readLine(); 

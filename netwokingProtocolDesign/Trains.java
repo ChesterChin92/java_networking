@@ -261,7 +261,7 @@ public class Trains {
 			}
 		}
 		if (found == 0)
-			s = new String("TN: " + nID);
+			s = new String("Ticket not found for: " + nID); //TN
 		return s;
 	}
 
@@ -280,7 +280,7 @@ public class Trains {
 			}
 		}
 		if (found == 0)
-			s = new String("PD: " + nID);
+			s = new String("Date for the ID is not found: " + nID); //PD
 		return s;
 	}
 
@@ -299,7 +299,7 @@ public class Trains {
 			}
 		}
 		if (found == 0)
-			s = new String("PT: " + nID);
+			s = new String("Ticket date time not found for: " + nID); //PT
 		return s;
 	}
 
